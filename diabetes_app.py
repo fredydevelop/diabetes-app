@@ -33,7 +33,7 @@ from streamlit_option_menu import option_menu
 #configuring the page setup
 st.set_page_config(page_title='Diabetes prediction system',layout='centered')
 
-st.image('logo.jpg', width=120,caption='Sunrise by the mountains')
+st.image('logo.jpg', width=120,caption='SMART ABETES')
 selection=option_menu(menu_title=None,options=["Single Prediction","Multi Prediction"],icons=["cast","book","cast"],default_index=0,orientation="horizontal")
 
 
