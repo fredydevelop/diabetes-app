@@ -47,7 +47,7 @@ def filedownload(df):
 #single prediction function
 def LungDetector(givendata):
     
-    loaded_model=pk.load(open("The_New_Latest_Diabetes_Model.sav", "rb"))
+    loaded_model=pk.load(open("The_New_Latest_Lung Cancer_Model.sav", "rb"))
     input_data_as_numpy_array = np.asarray(givendata)# changing the input_data to numpy array
     input_data_reshaped = input_data_as_numpy_array.reshape(1,-1) # reshape the array as we are predicting for one instance
     std_scaler_loaded=pk.load(open("my_new_saved_std_scaler.pkl", "rb"))
@@ -171,7 +171,7 @@ def main():
 
 
 def multi(input_data):
-    loaded_model=pk.load(open("The_Latest_Diabetes_Model", "rb"))
+    loaded_model=pk.load(open("The_New_Latest_Lung Cancer_Model.sav", "rb"))
     dfinput = pd.read_csv(input_data)
     # dfinput=dfinput.iloc[1:].reset_index(drop=True)
 
@@ -180,7 +180,7 @@ def multi(input_data):
     st.dataframe(dfinput)
 
     dfinput=dfinput.values
-    std_scaler_loaded=pk.load(open("my_saved_std_scaler.pkl", "rb"))
+    std_scaler_loaded=pk.load(open("my_new_saved_std_scaler.pkl", "rb"))
     std_dfinput=std_scaler_loaded.transform(dfinput)
     
     
