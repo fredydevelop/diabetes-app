@@ -82,13 +82,13 @@ def main():
         HighBP=0
 
     option3 = st.selectbox('High Cholesterol',("",'Yes' ,'No'),key="high_chol")
-    if (option3=='YES'):
+    if (option3=='Yes'):
         HighChol=1
     else:
         HighChol=0
 
     option4 = st.selectbox('Heart Disease or Attack',("",'Yes' ,'No'),key="heart_disease")
-    if (option4=='YES'):
+    if (option4=='Yes'):
         HeartDiseaseorAttack=1
     else:
         HeartDiseaseorAttack=0
@@ -100,7 +100,7 @@ def main():
     
 #
     option5 = st.selectbox('Stroke',("",'Yes' ,'No'),key="stroke")
-    if (option5=='YES'):
+    if (option5=='Yes'):
         Stroke=1
     else:
         Stroke=0
@@ -109,7 +109,7 @@ def main():
     
 
     option6 = st.selectbox('PhysActivity',("",'Yes' ,'No'),key="physical_activity")
-    if (option6=='YES'):
+    if (option6=='Yes'):
         PhysActivity=1
     else:
         PhysActivity=0
@@ -133,20 +133,20 @@ def main():
 
 
     option8 = st.selectbox('Difficult in walking',("",'Yes' ,'No'),key="DiffWalk")
-    if (option8=='YES'):
+    if (option8=='Yes'):
         DiffWalk=1
     else:
         DiffWalk=0
 
     option9 = st.selectbox('Fruit Consumption',("",'Yes' ,'No'),key="Fruits")
-    if (option9=='YES'):
+    if (option9=='Yes'):
         Fruits=1
     else:
         Fruits=0
 
 
     option10 = st.selectbox('Veggies',("",'Yes' ,'No'),key="Veggies")
-    if (option10=='YES'):
+    if (option10=='Yes'):
         Veggies=1
     else:
         Veggies=0
