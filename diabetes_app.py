@@ -45,7 +45,7 @@ def filedownload(df):
 
 
 #single prediction function
-def LungDetector(givendata):
+def Diabetes(givendata):
     
     loaded_model=pk.load(open("The_Latest_Diabetes_Model.sav", "rb"))
     input_data_as_numpy_array = np.asarray(givendata)# changing the input_data to numpy array
@@ -190,7 +190,7 @@ def main():
     
     # creating a button for Prediction
     if age!="" and option1!=""  and option2!=""  and option3!=""  and option4!="" and option5!="" and option6!="" and option7 !=""and  option8 !="" and option9!="" and option10 !="" and option11 !=""  and st.button('Predict'):
-        detectionResult = LungDetector([age,Sex,HighBP,HighChol,HeartDiseaseorAttack,BMI,Stroke,PhysActivity,GenHlth,DiffWalk,Fruits,Veggies,Education,Income,PhysHlth])
+        detectionResult = Diabetes([age,Sex,HighBP,HighChol,HeartDiseaseorAttack,BMI,Stroke,PhysActivity,GenHlth,DiffWalk,Fruits,Veggies,Education,Income,PhysHlth])
         st.success(detectionResult)
 
 
