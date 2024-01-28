@@ -47,10 +47,10 @@ def filedownload(df):
 #single prediction function
 def LungDetector(givendata):
     
-    loaded_model=pk.load(open("The_New_Latest_Lung Cancer_Model.sav", "rb"))
+    loaded_model=pk.load(open("The_Latest_Diabetes_Model.sav", "rb"))
     input_data_as_numpy_array = np.asarray(givendata)# changing the input_data to numpy array
     input_data_reshaped = input_data_as_numpy_array.reshape(1,-1) # reshape the array as we are predicting for one instance
-    std_scaler_loaded=pk.load(open("my_new_saved_std_scaler.pkl", "rb"))
+    std_scaler_loaded=pk.load(open("my_saved_std_scaler.pkl", "rb"))
     std_X_resample=std_scaler_loaded.transform(input_data_reshaped)
     prediction = loaded_model.predict(std_X_resample)
     if prediction==1:
@@ -63,97 +63,121 @@ def LungDetector(givendata):
 def main():
     st.header("Diabetes Detection and prediction System")
     
-    AGE = st.slider('Patient age', 0, 200, key="age")
-    st.write("Patient is", AGE, 'years old')
+    #getting user input
+    
+    age = st.slider('Patient age', 0, 200, key="age")
+    st.write("Patient is", age, 'years old')
 
     option1 = st.selectbox('Sex',("",'Male' ,'Female'),key="sex")
     if (option1=='Male'):
-        GENDER=1
+        Sex=1
     else:
-        GENDER=0
+        Sex=0
 
-    option2 = st.selectbox('SMOKING',("",'Yes' ,'No'),key="smok")
+    option2 = st.selectbox('HighBP',("",'Yes' ,'No'),key="highbp")
     if (option2=='Yes'):
-        SMOKING=1
+        HighBP=1
     else:
-        SMOKING=0
+        HighBP=0
 
-    option3 = st.selectbox('YELLOW_FINGERS',("",'Yes' ,'No'),key="yellow")
-    if (option3=='Yes'):
-        YELLOW_FINGERS=1
+    option3 = st.selectbox('High Cholesterol',("",'Yes' ,'No'),key="high_chol")
+    if (option3=='YES'):
+        HighChol=1
     else:
-        YELLOW_FINGERS=0
+        HighChol=0
 
-    option4 = st.selectbox('ANXIETY',("",'Yes' ,'No'),key="anxiet")
-    if (option4=='Yes'):
-        ANXIETY=1
+    option4 = st.selectbox('Heart Disease or Attack',("",'Yes' ,'No'),key="heart_disease")
+    if (option4=='YES'):
+        HeartDiseaseorAttack=1
     else:
-        ANXIETY=0
-
-    option5 = st.selectbox('PEER_PRESSURE',("",'Yes' ,'No'),key="peer")
-    if (option5=='Yes'):
-        PEER_PRESSURE=1
-    else:
-        PEER_PRESSURE=0
+        HeartDiseaseorAttack=0
 
 
-    option6 = st.selectbox('CHRONIC DISEASE',("",'Yes' ,'No'),key="chronic")
-    if (option6=='Yes'):
-        CHRONIC_DISEASE=1
-    else:
-        CHRONIC_DISEASE=0
-
-
-    option7 = st.selectbox('FATIGUE',("",'Yes' ,'No'),key="fatge")
-    if (option7=='Yes'):
-        FATIGUE=1
-    else:
-        FATIGUE=2
-
-
-    option8 = st.selectbox('ALLERGY',("",'Yes' ,'No'),key="allerg")
-    if (option8=='Yes'):
-        ALLERGY=1
-    else:
-        ALLERGY=0
-
-    option9 = st.selectbox('WHEEZING',("",'Yes' ,'No'),key="wheez")
-    if (option9=='Yes'):
-        WHEEZING=1
-    else:
-        WHEEZING=0
-
-
-    option10 = st.selectbox('ALCOHOL CONSUMING',("",'Yes' ,'No'),key="alcohol")
-    if (option10=='Yes'):
-        ALCOHOL_CONSUMING=1
-    else:
-        ALCOHOL_CONSUMING=0
+    BMI = st.slider('Patient BMI', 0, 200, key="bmi")
+    st.write("Patient BMI is", BMI)
 
     
-    option11 = st.selectbox('COUGHING',("",'Yes' ,'No'),key="cough")
-    if (option11=='Yes'):
-        COUGHING=1
+#
+    option5 = st.selectbox('Stroke',("",'Yes' ,'No'),key="stroke")
+    if (option5=='YES'):
+        Stroke=1
     else:
-        COUGHING=0
+        Stroke=0
 
-    option12 = st.selectbox('SHORTNESS OF BREATH',("",'Yes' ,'No'),key="shortbreath")
-    if (option12=='Yes'):
-        SHORTNESS_OF_BREATH=1
-    else:
-        SHORTNESS_OF_BREATH=0
 
-    option13 = st.selectbox('SWALLOWING DIFFICULTY',("",'Yes' ,'No'),key="swallow")
-    if (option13=='Yes'):
-        SWALLOWING_DIFFICULTY=1
-    else:
-        SWALLOWING_DIFFICULTY=0
+    
 
-    option14 = st.selectbox('CHEST PAIN',("",'Yes' ,'No'),key="chestpain")
-    if (option14=='Yes'):
-        CHEST_PAIN=1
+    option6 = st.selectbox('PhysActivity',("",'Yes' ,'No'),key="physical_activity")
+    if (option6=='YES'):
+        PhysActivity=1
     else:
-        CHEST_PAIN=0
+        PhysActivity=0
+
+
+    option7 = st.selectbox('GenHlth',("",'Poor' ,'Fair',"Good","Very Good","Excellent"),key="GenHlth")
+    if (option7=='Poor'):
+        GenHlth=1
+
+    elif (option7=='Fair'):
+        GenHlth=2
+    
+    elif (option7=='=Good'):
+        GenHlth=3
+
+    elif (option7=='Very Good'):
+        GenHlth=4
+
+    else:
+        GenHlth=5
+
+
+    option8 = st.selectbox('Difficult in walking',("",'Yes' ,'No'),key="DiffWalk")
+    if (option8=='YES'):
+        DiffWalk=1
+    else:
+        DiffWalk=0
+
+    option9 = st.selectbox('Fruit Consumption',("",'Yes' ,'No'),key="Fruits")
+    if (option9=='YES'):
+        Fruits=1
+    else:
+        Fruits=0
+
+
+    option10 = st.selectbox('Veggies',("",'Yes' ,'No'),key="Veggies")
+    if (option10=='YES'):
+        Veggies=1
+    else:
+        Veggies=0
+
+    
+    option11 = st.selectbox('Education',("",'Less than high school education' ,'High school education','college or associate', "Bachelor's degree","Master's degree","Doctoral degree"),key="Education")
+    if (option11=='Less than high school education'):
+        Education=1
+
+    elif (option11=='High school education'):
+        Education=2
+    
+    elif (option11=='=college or associate'):
+        Education=3
+
+    elif (option11== "Bachelor's degree"):
+        Education=4
+
+    elif (option11=="Master's degree"):
+        Education=5
+
+    else:
+        Education=5
+
+
+    Income = st.slider('Patient Income * 100', 0, 10000, key="income")
+    st.write("Patient income is", Income)
+
+
+    PhysHlth = st.slider('What is the level of Patient Health', 0, 60, key="PhysHlth")
+    
+
 
     st.write("\n")
     st.write("\n")
@@ -165,13 +189,13 @@ def main():
     detectionResult = ''#for displaying result
     
     # creating a button for Prediction
-    if AGE!=0 and option1!=""  and option2!=""  and option3!=""  and option4!="" and option5!="" and option6!="" and option7 !=""and  option8 !="" and option9!="" and option10 !="" and option11 !="" and option12 !="" and option13 !="" and option14 !=""  and st.button('Predict'):
-        detectionResult = LungDetector(["GENDER", "AGE", "SMOKING", "YELLOW_FINGERS", "ANXIETY", "PEER_PRESSURE", "CHRONIC_DISEASE", "FATIGUE", "ALLERGY", "WHEEZING", "ALCOHOL_CONSUMING", "COUGHING", "SHORTNESS_OF_BREATH", "SWALLOWING_DIFFICULTY", "CHEST_PAIN"])
+    if age!="" and option1!=""  and option2!=""  and option3!=""  and option4!="" and option5!="" and option6!="" and option7 !=""and  option8 !="" and option9!="" and option10 !="" and option11 !=""  and st.button('Predict'):
+        detectionResult = LungDetector([age,Sex,HighBP,HighChol,HeartDiseaseorAttack,BMI,Stroke,PhysActivity,GenHlth,DiffWalk,Fruits,Veggies,Education,Income,PhysHlth])
         st.success(detectionResult)
 
 
 def multi(input_data):
-    loaded_model=pk.load(open("The_New_Latest_Lung Cancer_Model.sav", "rb"))
+    loaded_model=pk.load(open("The_Latest_Diabetes_Model", "rb"))
     dfinput = pd.read_csv(input_data)
     # dfinput=dfinput.iloc[1:].reset_index(drop=True)
 
@@ -180,7 +204,7 @@ def multi(input_data):
     st.dataframe(dfinput)
 
     dfinput=dfinput.values
-    std_scaler_loaded=pk.load(open("my_new_saved_std_scaler.pkl", "rb"))
+    std_scaler_loaded=pk.load(open("my_saved_std_scaler.pkl", "rb"))
     std_dfinput=std_scaler_loaded.transform(dfinput)
     
     
