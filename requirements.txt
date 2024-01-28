@@ -2,6 +2,6 @@ numpy
 pickle-mixin
 streamlit
 streamlit-option-menu
-scikit-learn
+scikit-learn== 1.4.0
 Matplotlib
 pandas
