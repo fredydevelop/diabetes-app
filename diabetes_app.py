@@ -143,7 +143,7 @@ def main():
     else:
         SHORTNESS_OF_BREATH=0
 
-    option13 = st.selectbox('SWALLOWING DIFFICULTY',("",'Yes' ,'No'),key="cough")
+    option13 = st.selectbox('SWALLOWING DIFFICULTY',("",'Yes' ,'No'),key="swallow")
     if (option13=='Yes'):
         SWALLOWING_DIFFICULTY=1
     else:
@@ -155,14 +155,6 @@ def main():
     else:
         CHEST_PAIN=0
 
-    option15 = st.selectbox('COUGHING',("",'Yes' ,'No'),key="cough")
-    if (option15=='Yes'):
-        COUGHING=1
-    else:
-        COUGHING=2
-    
-
-
     st.write("\n")
     st.write("\n")
 
@@ -173,7 +165,7 @@ def main():
     detectionResult = ''#for displaying result
     
     # creating a button for Prediction
-    if age!=0 and option1!=""  and option2!=""  and option3!=""  and option4!="" and option5!="" and option6!="" and option7 !=""and  option8 !="" and option9!="" and option10 !="" and option11 !="" and option12 !="" and option13 !="" and option14 !="" and option15 !=""  and st.button('Predict'):
+    if age!=0 and option1!=""  and option2!=""  and option3!=""  and option4!="" and option5!="" and option6!="" and option7 !=""and  option8 !="" and option9!="" and option10 !="" and option11 !="" and option12 !="" and option13 !="" and option14 !=""  and st.button('Predict'):
         detectionResult = LungDetector(["GENDER", "AGE", "SMOKING", "YELLOW_FINGERS", "ANXIETY", "PEER_PRESSURE", "CHRONIC_DISEASE", "FATIGUE", "ALLERGY", "WHEEZING", "ALCOHOL_CONSUMING", "COUGHING", "SHORTNESS_OF_BREATH", "SWALLOWING_DIFFICULTY", "CHEST_PAIN"])
         st.success(detectionResult)
 
