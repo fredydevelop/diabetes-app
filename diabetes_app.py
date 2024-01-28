@@ -186,12 +186,11 @@ def main():
 
 
 
-
     detectionResult = ''#for displaying result
     
     # creating a button for Prediction
     if age!="" and option1!=""  and option2!=""  and option3!=""  and option4!="" and option5!="" and option6!="" and option7 !=""and  option8 !="" and option9!="" and option10 !="" and option11 !=""  and st.button('Predict'):
-        detectionResult = Diabetes([age,Sex,HighBP,HighChol,HeartDiseaseorAttack,BMI,Stroke,PhysActivity,GenHlth,DiffWalk,Fruits,Veggies,Education,Income,PhysHlth])
+        detectionResult = Diabetes([HighBP,HighChol,BMI,Stroke,HeartDiseaseorAttack,PhysActivity,Fruits,Veggies,GenHlth,PhysHlth,DiffWalk,Sex,age,Education,Income,])
         st.success(detectionResult)
 
 
