@@ -195,7 +195,7 @@ def main():
 
 
 def multi(input_data):
-    loaded_model=pk.load(open("The_Latest_Diabetes_Model", "rb"))
+    loaded_model=pk.load(open("The_Latest_Diabetes_Model.sav", "rb"))
     dfinput = pd.read_csv(input_data)
     # dfinput=dfinput.iloc[1:].reset_index(drop=True)
 
