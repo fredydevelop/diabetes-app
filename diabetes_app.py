@@ -67,7 +67,6 @@ def main():
     #getting user input
     
     Sugar_Levels= st.number_input("Sugar Levels", value=None, placeholder="Enter the sugar level")
-    st.write('The current number is ', Sugar_Levels)
 
     frequent_urination= st.selectbox('frequent urination',("",'Yes' ,'No'),key="frequent_urine")
     if (frequent_urination=='Yes'):
