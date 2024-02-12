@@ -67,7 +67,7 @@ def main():
     #getting user input
     
     Sugar_Levels= st.number_input("Sugar Levels", value=None, placeholder="Enter the sugar level")
-    st.write('The current number is ', number)
+    st.write('The current number is ', Sugar_Levels)
     
     age = st.number_input("Age", value=None, placeholder="Enter the age of patient")
     st.write("Patient is", age, 'years old')
