@@ -70,7 +70,7 @@ def main():
     st.write('The current number is ', Sugar_Levels)
     
     age = st.number_input("Age", value=None, placeholder="Enter the age of patient")
-    st.write("Patient is", age, 'years old')
+    st.write("Patient is", age, age)
 
     option1 = st.selectbox('Sex',("",'Male' ,'Female'),key="sex")
     if (option1=='Male'):
