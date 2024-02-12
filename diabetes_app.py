@@ -209,12 +209,11 @@ def main():
         Education=5
 
 
-    Income = st.slider('Patient Income * 100', 0, 10000, key="income")
-    st.write("Patient income is", Income)
+    Income =st.number_input("Income", value=None)
 
 
-    PhysHlth = st.slider('What is the level of Patient Health', 0, 60, key="PhysHlth")
-    
+    PhysHlth = st.number_input("Age", value=None, placeholder="patient health")
+
 
 
     st.write("\n")
