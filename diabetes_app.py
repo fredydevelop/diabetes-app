@@ -66,7 +66,10 @@ def main():
     
     #getting user input
     
-    age = st.slider('Patient age', 0, 200, key="age")
+    Sugar_Levels= st.number_input("Sugar Levels", value=None, placeholder="Enter the sugar level")
+    st.write('The current number is ', number)
+    
+    age = st.number_input("Age", value=None, placeholder="Enter the age of patient")
     st.write("Patient is", age, 'years old')
 
     option1 = st.selectbox('Sex',("",'Male' ,'Female'),key="sex")
