@@ -68,7 +68,41 @@ def main():
     
     Sugar_Levels= st.number_input("Sugar Levels", value=None, placeholder="Enter the sugar level")
     st.write('The current number is ', Sugar_Levels)
+
+    frequent_urination= st.selectbox('frequent urination',("",'Yes' ,'No'),key="frequent_urine")
+    if (frequent_urination=='Yes'):
+        nooption1=1
+    else:
+        nooption1=0
+
+
+    slow_healing_wounds=st.selectbox('slow_healing_wounds',("",'Yes' ,'No'),key="slow_healing_woun")
+    if (slow_healing_wounds=='Yes'):
+        nooption2=1
+    else:
+        nooption2=0
+
+    family_history=st.selectbox('family_history',("",'Yes' ,'No'),key="family_histo")
+    if (family_history=='Yes'):
+        nooption3=1
+    else:
+        nooption3=0
+
+    pregnancy=st.selectbox('pregnancy',("",'Yes' ,'No'),key="pregn")
+    if (family_history=='Yes'):
+        nooption4=1
+    else:
+        nooption4=0
+
+
+
+
+
+
+
+
     
+        
     age = st.number_input("Age", value=None, placeholder="Enter the age of patient")
     st.write("Patient is", age, age)
 
@@ -192,7 +226,7 @@ def main():
     detectionResult = ''#for displaying result
     
     # creating a button for Prediction
-    if age!="" and option1!=""  and option2!=""  and option3!=""  and option4!="" and option5!="" and option6!="" and option7 !=""and  option8 !="" and option9!="" and option10 !="" and option11 !=""  and st.button('Predict'):
+    if age!="" and Sugar_Levels!="" and frequent_urination!="" and slow_healing_wounds!="" and family_history!="" and option1!=""  and option2!=""  and option3!=""  and option4!="" and option5!="" and option6!="" and option7 !=""and  option8 !="" and option9!="" and option10 !="" and option11 !=""  and st.button('Predict'):
         detectionResult = Diabetes([HighBP,HighChol,BMI,Stroke,HeartDiseaseorAttack,PhysActivity,Fruits,Veggies,GenHlth,PhysHlth,DiffWalk,Sex,age,Education,Income,])
         st.success(detectionResult)
 
