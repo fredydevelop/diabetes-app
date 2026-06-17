@@ -47,186 +47,198 @@ def filedownload(df):
 
 #single prediction function
 def Diabetes(givendata):
-    
-    loaded_model=pk.load(open("The_Latest_Diabetes_Model.sav", "rb"))
-    input_data_as_numpy_array = np.asarray(givendata)# changing the input_data to numpy array
-    input_data_reshaped = input_data_as_numpy_array.reshape(1,-1) # reshape the array as we are predicting for one instance
-    std_scaler_loaded=pk.load(open("my_saved_std_scaler.pkl", "rb"))
-    std_X_resample=std_scaler_loaded.transform(input_data_reshaped)
+
+    loaded_model = pk.load(open("The_Latest_Diabetes_Model.sav", "rb"))
+
+    input_data_as_numpy_array = np.asarray(givendata)
+
+    input_data_reshaped = input_data_as_numpy_array.reshape(1, -1)
+
+    std_scaler_loaded = pk.load(open("my_saved_std_scaler.pkl", "rb"))
+
+    std_X_resample = std_scaler_loaded.transform(input_data_reshaped)
+
     prediction = loaded_model.predict(std_X_resample)
-    if prediction==1:
-      return "Diabetes is Detected"
+
+    if prediction[0] == 1:
+        return "Diabetes is Detected"
     else:
-      return "No Diabetes Detected"
+        return "No Diabetes Detected"
     
  
 #main function handling the input
 def main():
-    st.header("Diabetes Detection and prediction System")
-    
-    #getting user input
-    
-    Sugar_Levels= st.number_input("Sugar Levels", value=None, placeholder="Enter the sugar level")
 
-    frequent_urination= st.selectbox('frequent urination',("",'Yes' ,'No'),key="frequent_urine")
-    if (frequent_urination=='Yes'):
-        nooption1=1
-    else:
-        nooption1=0
+    st.header("Diabetes Detection and Prediction System")
 
+    col1, col2 = st.columns(2)
 
-    slow_healing_wounds=st.selectbox('slow_healing_wounds',("",'Yes' ,'No'),key="slow_healing_woun")
-    if (slow_healing_wounds=='Yes'):
-        nooption2=1
-    else:
-        nooption2=0
+    with col1:
 
-    family_history=st.selectbox('family_history',("",'Yes' ,'No'),key="family_histo")
-    if (family_history=='Yes'):
-        nooption3=1
-    else:
-        nooption3=0
+        age = st.number_input(
+            "Age",
+            min_value=1,
+            max_value=120,
+            value=30
+        )
 
-    pregnancy=st.selectbox('pregnancy',("",'Yes' ,'No'),key="pregn")
-    if (family_history=='Yes'):
-        nooption4=1
-    else:
-        nooption4=0
+        option1 = st.selectbox(
+            "Sex",
+            ("Male", "Female")
+        )
 
+        Sex = 1 if option1 == "Male" else 0
 
+        option2 = st.selectbox(
+            "High Blood Pressure",
+            ("Yes", "No")
+        )
 
+        HighBP = 1 if option2 == "Yes" else 0
 
+        option3 = st.selectbox(
+            "High Cholesterol",
+            ("Yes", "No")
+        )
 
+        HighChol = 1 if option3 == "Yes" else 0
 
+        BMI = st.slider(
+            "BMI",
+            min_value=10,
+            max_value=60,
+            value=25
+        )
 
+        option5 = st.selectbox(
+            "Stroke",
+            ("Yes", "No")
+        )
 
-    
-        
-    age = st.number_input("Age", value=None, placeholder="Enter the age of patient")
-    st.write("Patient is", age, age)
+        Stroke = 1 if option5 == "Yes" else 0
 
-    option1 = st.selectbox('Sex',("",'Male' ,'Female'),key="sex")
-    if (option1=='Male'):
-        Sex=1
-    else:
-        Sex=0
+        option4 = st.selectbox(
+            "Heart Disease or Attack",
+            ("Yes", "No")
+        )
 
-    option2 = st.selectbox('HighBP',("",'Yes' ,'No'),key="highbp")
-    if (option2=='Yes'):
-        HighBP=1
-    else:
-        HighBP=0
+        HeartDiseaseorAttack = 1 if option4 == "Yes" else 0
 
-    option3 = st.selectbox('High Cholesterol',("",'Yes' ,'No'),key="high_chol")
-    if (option3=='Yes'):
-        HighChol=1
-    else:
-        HighChol=0
+    with col2:
 
-    option4 = st.selectbox('Heart Disease or Attack',("",'Yes' ,'No'),key="heart_disease")
-    if (option4=='Yes'):
-        HeartDiseaseorAttack=1
-    else:
-        HeartDiseaseorAttack=0
+        option6 = st.selectbox(
+            "Physical Activity",
+            ("Yes", "No")
+        )
 
+        PhysActivity = 1 if option6 == "Yes" else 0
 
-    BMI = st.slider('Patient BMI', 0, 200, key="bmi")
-    st.write("Patient BMI is", BMI)
+        option9 = st.selectbox(
+            "Fruit Consumption",
+            ("Yes", "No")
+        )
 
-    
-#
-    option5 = st.selectbox('Stroke',("",'Yes' ,'No'),key="stroke")
-    if (option5=='Yes'):
-        Stroke=1
-    else:
-        Stroke=0
+        Fruits = 1 if option9 == "Yes" else 0
 
+        option10 = st.selectbox(
+            "Vegetable Consumption",
+            ("Yes", "No")
+        )
 
-    
+        Veggies = 1 if option10 == "Yes" else 0
 
-    option6 = st.selectbox('PhysActivity',("",'Yes' ,'No'),key="physical_activity")
-    if (option6=='Yes'):
-        PhysActivity=1
-    else:
-        PhysActivity=0
+        option7 = st.selectbox(
+            "General Health",
+            (
+                "Poor",
+                "Fair",
+                "Good",
+                "Very Good",
+                "Excellent"
+            )
+        )
 
+        health_mapping = {
+            "Poor": 1,
+            "Fair": 2,
+            "Good": 3,
+            "Very Good": 4,
+            "Excellent": 5
+        }
 
-    option7 = st.selectbox('GenHlth',("",'Poor' ,'Fair',"Good","Very Good","Excellent"),key="GenHlth")
-    if (option7=='Poor'):
-        GenHlth=1
+        GenHlth = health_mapping[option7]
 
-    elif (option7=='Fair'):
-        GenHlth=2
-    
-    elif (option7=='=Good'):
-        GenHlth=3
+        option8 = st.selectbox(
+            "Difficulty Walking",
+            ("Yes", "No")
+        )
 
-    elif (option7=='Very Good'):
-        GenHlth=4
+        DiffWalk = 1 if option8 == "Yes" else 0
 
-    else:
-        GenHlth=5
+        PhysHlth = st.number_input(
+            "Physical Health (Days)",
+            min_value=0,
+            max_value=30,
+            value=0
+        )
 
+        option11 = st.selectbox(
+            "Education",
+            (
+                "Less than high school education",
+                "High school education",
+                "College or Associate",
+                "Bachelor's degree",
+                "Master's degree",
+                "Doctoral degree"
+            )
+        )
 
-    option8 = st.selectbox('Difficult in walking',("",'Yes' ,'No'),key="DiffWalk")
-    if (option8=='Yes'):
-        DiffWalk=1
-    else:
-        DiffWalk=0
+        education_mapping = {
+            "Less than high school education": 1,
+            "High school education": 2,
+            "College or Associate": 3,
+            "Bachelor's degree": 4,
+            "Master's degree": 5,
+            "Doctoral degree": 6
+        }
 
-    option9 = st.selectbox('Fruit Consumption',("",'Yes' ,'No'),key="Fruits")
-    if (option9=='Yes'):
-        Fruits=1
-    else:
-        Fruits=0
+        Education = education_mapping[option11]
 
+        Income = st.number_input(
+            "Income",
+            min_value=0,
+            value=0
+        )
 
-    option10 = st.selectbox('Veggies',("",'Yes' ,'No'),key="Veggies")
-    if (option10=='Yes'):
-        Veggies=1
-    else:
-        Veggies=0
+    st.markdown("---")
 
-    
-    option11 = st.selectbox('Education',("",'Less than high school education' ,'High school education','college or associate', "Bachelor's degree","Master's degree","Doctoral degree"),key="Education")
-    if (option11=='Less than high school education'):
-        Education=1
+    if st.button("Predict"):
 
-    elif (option11=='High school education'):
-        Education=2
-    
-    elif (option11=='=college or associate'):
-        Education=3
+        input_data = [
+            HighBP,
+            HighChol,
+            BMI,
+            Stroke,
+            HeartDiseaseorAttack,
+            PhysActivity,
+            Fruits,
+            Veggies,
+            GenHlth,
+            PhysHlth,
+            DiffWalk,
+            Sex,
+            age,
+            Education,
+            Income
+        ]
 
-    elif (option11== "Bachelor's degree"):
-        Education=4
+        detectionResult = Diabetes(input_data)
 
-    elif (option11=="Master's degree"):
-        Education=5
-
-    else:
-        Education=5
-
-
-    Income =st.number_input("Income", value=None)
-
-
-    PhysHlth = st.number_input("Age", value=None, placeholder="patient health")
-
-
-
-    st.write("\n")
-    st.write("\n")
-
-
-
-
-    detectionResult = ''#for displaying result
-    
-    # creating a button for Prediction
-    if age!="" and Sugar_Levels!="" and frequent_urination!="" and slow_healing_wounds!="" and family_history!="" and option1!=""  and option2!=""  and option3!=""  and option4!="" and option5!="" and option6!="" and option7 !=""and  option8 !="" and option9!="" and option10 !="" and option11 !=""  and st.button('Predict'):
-        detectionResult = Diabetes([HighBP,HighChol,BMI,Stroke,HeartDiseaseorAttack,PhysActivity,Fruits,Veggies,GenHlth,PhysHlth,DiffWalk,Sex,age,Education,Income,])
-        st.success(detectionResult)
+        if detectionResult == "Diabetes is Detected":
+            st.error(detectionResult)
+        else:
+            st.success(detectionResult)
 
 
 def multi(input_data):
