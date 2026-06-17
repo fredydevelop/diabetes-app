@@ -300,7 +300,6 @@ if selection =="Single Prediction":
     main()
 
 if selection == "Multi Prediction":
-    st.set_option('deprecation.showPyplotGlobalUse', False)
     #---------------------------------#
     # Prediction
     #--------------------------------
