@@ -78,105 +78,37 @@ def main():
 
     st.header("Diabetes Detection and Prediction System")
 
+    # ======================
+    # AGE VALIDATION
+    # ======================
     age = st.number_input(
         "Age",
-        min_value=1,
+        min_value=0,
         max_value=120,
-        value=30
+        value=0,
+        step=1
     )
 
-    option1 = st.selectbox(
-        "Sex",
-        ("Male", "Female")
-    )
-    Sex = 1 if option1 == "Male" else 0
-
-    option2 = st.selectbox(
-        "High Blood Pressure",
-        ("Yes", "No")
-    )
-    HighBP = 1 if option2 == "Yes" else 0
-
-    option3 = st.selectbox(
-        "High Cholesterol",
-        ("Yes", "No")
-    )
-    HighChol = 1 if option3 == "Yes" else 0
-
-    BMI = st.slider(
-        "BMI",
-        min_value=10,
-        max_value=60,
-        value=25
-    )
-
-    option5 = st.selectbox(
-        "Stroke",
-        ("Yes", "No")
-    )
-    Stroke = 1 if option5 == "Yes" else 0
-
-    option4 = st.selectbox(
-        "Heart Disease or Attack",
-        ("Yes", "No")
-    )
-    HeartDiseaseorAttack = 1 if option4 == "Yes" else 0
-
-    option6 = st.selectbox(
-        "Physical Activity",
-        ("Yes", "No")
-    )
-    PhysActivity = 1 if option6 == "Yes" else 0
-
-    option9 = st.selectbox(
-        "Fruit Consumption",
-        ("Yes", "No")
-    )
-    Fruits = 1 if option9 == "Yes" else 0
-
-    option10 = st.selectbox(
-        "Vegetable Consumption",
-        ("Yes", "No")
-    )
-    Veggies = 1 if option10 == "Yes" else 0
-
+    # ======================
+    # EMPTY DEFAULT SELECTS
+    # ======================
+    option1 = st.selectbox("Sex", ("", "Male", "Female"))
+    option2 = st.selectbox("High Blood Pressure", ("", "Yes", "No"))
+    option3 = st.selectbox("High Cholesterol", ("", "Yes", "No"))
+    option4 = st.selectbox("Heart Disease or Attack", ("", "Yes", "No"))
+    option5 = st.selectbox("Stroke", ("", "Yes", "No"))
+    option6 = st.selectbox("Physical Activity", ("", "Yes", "No"))
     option7 = st.selectbox(
         "General Health",
-        (
-            "Poor",
-            "Fair",
-            "Good",
-            "Very Good",
-            "Excellent"
-        )
+        ("", "Poor", "Fair", "Good", "Very Good", "Excellent")
     )
-
-    health_mapping = {
-        "Poor": 1,
-        "Fair": 2,
-        "Good": 3,
-        "Very Good": 4,
-        "Excellent": 5
-    }
-
-    GenHlth = health_mapping[option7]
-
-    option8 = st.selectbox(
-        "Difficulty Walking",
-        ("Yes", "No")
-    )
-    DiffWalk = 1 if option8 == "Yes" else 0
-
-    PhysHlth = st.number_input(
-        "Physical Health (Days)",
-        min_value=0,
-        max_value=30,
-        value=0
-    )
-
+    option8 = st.selectbox("Difficulty Walking", ("", "Yes", "No"))
+    option9 = st.selectbox("Fruit Consumption", ("", "Yes", "No"))
+    option10 = st.selectbox("Vegetable Consumption", ("", "Yes", "No"))
     option11 = st.selectbox(
         "Education",
         (
+            "",
             "Less than high school education",
             "High school education",
             "College or Associate",
@@ -186,16 +118,17 @@ def main():
         )
     )
 
-    education_mapping = {
-        "Less than high school education": 1,
-        "High school education": 2,
-        "College or Associate": 3,
-        "Bachelor's degree": 4,
-        "Master's degree": 5,
-        "Doctoral degree": 6
-    }
+    # ======================
+    # NUMERIC INPUTS
+    # ======================
+    BMI = st.slider("BMI", 10, 60, 25)
 
-    Education = education_mapping[option11]
+    PhysHlth = st.number_input(
+        "Physical Health (Days)",
+        min_value=0,
+        max_value=30,
+        value=0
+    )
 
     Income = st.number_input(
         "Income",
@@ -203,9 +136,83 @@ def main():
         value=0
     )
 
-    st.write("")
+    # ======================
+    # VALIDATION LOGIC
+    # ======================
+    all_filled = (
+        age > 0 and
+        option1 != "" and
+        option2 != "" and
+        option3 != "" and
+        option4 != "" and
+        option5 != "" and
+        option6 != "" and
+        option7 != "" and
+        option8 != "" and
+        option9 != "" and
+        option10 != "" and
+        option11 != ""
+    )
 
+    # ======================
+    # ENCODING
+    # ======================
+    if option1:
+        Sex = 1 if option1 == "Male" else 0
+
+    if option2:
+        HighBP = 1 if option2 == "Yes" else 0
+
+    if option3:
+        HighChol = 1 if option3 == "Yes" else 0
+
+    if option4:
+        HeartDiseaseorAttack = 1 if option4 == "Yes" else 0
+
+    if option5:
+        Stroke = 1 if option5 == "Yes" else 0
+
+    if option6:
+        PhysActivity = 1 if option6 == "Yes" else 0
+
+    if option9:
+        Fruits = 1 if option9 == "Yes" else 0
+
+    if option10:
+        Veggies = 1 if option10 == "Yes" else 0
+
+    if option7:
+        health_mapping = {
+            "Poor": 1,
+            "Fair": 2,
+            "Good": 3,
+            "Very Good": 4,
+            "Excellent": 5
+        }
+        GenHlth = health_mapping.get(option7, 0)
+
+    if option8:
+        DiffWalk = 1 if option8 == "Yes" else 0
+
+    if option11:
+        education_mapping = {
+            "Less than high school education": 1,
+            "High school education": 2,
+            "College or Associate": 3,
+            "Bachelor's degree": 4,
+            "Master's degree": 5,
+            "Doctoral degree": 6
+        }
+        Education = education_mapping.get(option11, 0)
+
+    # ======================
+    # BUTTON CONTROL
+    # ======================
     if st.button("Predict"):
+
+        if not all_filled:
+            st.error("Please complete all fields and ensure Age > 0 before predicting.")
+            return
 
         input_data = [
             HighBP,
